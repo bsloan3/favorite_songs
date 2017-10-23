@@ -1,0 +1,11 @@
+<% @user.favorites.each do |favorite| %>
+  <h1><%= favorite.song.title %></h1>
+  <h4><%= favorite.song.artist %></h4>
+  <%= form_tag("/songs/#{favorite.song_id}/favorites/", method: "delete") do %>
+    <input type = "submit" value = "unfavorite">
+  <% end %>
+<% end %>
+
+<% if @errors %>
+  <p style="color:red;"><%= @errors %></p>
+<% end %>

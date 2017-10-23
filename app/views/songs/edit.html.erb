@@ -1,0 +1,7 @@
+<%= form_tag("/songs/#{@song.id}", method: "patch") do %>
+  <label for="song[title]">Title: </label>
+  <input value='<%= @song.title %>' type="text" name="song[title]">
+  <label for="song[artist]">song: </label>
+  <textarea name="song[artist]"><%= @song.artist %></textarea>
+  <input type="submit" name="Update">
+<% end %>

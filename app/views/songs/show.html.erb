@@ -1,0 +1,13 @@
+<h1><%= @song.title %></h1>
+<h4><%= @song.artist %></h4>
+<h4><%= @song.favorites.count %> Favorites</h4>
+<% if @current_user && @current_user.id == @song.user_id %>
+  <a href="/songs/<%= @song.id %>/edit">Edit</a>
+  <%= form_tag("/songs/#{@song.id}", method: "delete") do %>
+    <input type = "submit" value = "delete">
+  <% end %>
+<% end %>
+
+<% if @errors %>
+  <p style="color:red;"><%= @errors %></p>
+<% end %>

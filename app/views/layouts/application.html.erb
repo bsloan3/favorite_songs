@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FavoriteSongs</title>
+    <title>MyGreatApp</title>
     <%= csrf_meta_tags %>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
+  <header>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">FavSong</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      <% if @current_user %>
+        <li><a href="/songs/new">New Song</a></li>
+        <li><a href="/users/show"><%= @current_user.email %>'s Favorites</a></li>
+    </ul>
+
+        <ul style="float:right;" class="nav navbar-nav">
+          <li><a href="/"><%= @current_user.email %></a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+
+      <% else %>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/users/new">New User</a></li>
+      <% end %>
+  </div>
+</nav>
+
+  </header>
     <%= yield %>
   </body>
 </html>

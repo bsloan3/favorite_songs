@@ -1,0 +1,32 @@
+<ul class="list-group">
+<% @songs.each do |song| %>
+  <li><a href="/songs/<%= song.id %>" class="list-group-item list-group-item-action"><%= song.title %></a></li>
+  <p><%= song.artist %></p>
+
+  <p><%= song.favorites.count %></p>
+  <div class="edit-delete" style="display:flex;">
+    <% if @current_user && song.favorites.find_by(user_id: @current_user.id) %>
+      <%= form_tag("/songs/#{song.id}/favorites/", method: "delete") do %>
+        <input type = "submit" value = "unfavorite">
+      <% end %>
+    <% elsif @current_user %>
+      <%= form_tag("/songs/#{song.id}/favorites/", method: "post") do %>
+        <input type = "submit" value = "favorite">
+      <% end %>
+    <% end %>
+
+    <% if @current_user && @current_user.id == song.user_id%>
+      <%= form_tag("/songs/#{song.id}/edit", method: "get") do %>
+        <input type = "submit" value = "edit">
+      <% end %>
+      <%= form_tag("/songs/#{song.id}", method: "delete") do %>
+        <input type = "submit" value = "delete">
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @errors %>
+  <p style="color:red;"><%= @errors %></p>
+<% end %>
+</ul>
